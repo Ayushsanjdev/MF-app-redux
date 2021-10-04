@@ -1,31 +1,5 @@
 {
-    "name": "redux-micro-frontend-sample-shell",
-    "version": "0.0.0",
-    "license": "MIT",
-    "description": "This is a sample app as the MF shell",
-    "author": {
-        "name": "Pratik Bhattacharya",
-        "email": "pratikb@microsoft.com",
-        "url": "https://www.devcompost.com/"
-    },
-    "homepage": "https://github.com/microsoft/redux-micro-frontend",
-    "keywords": [
-        "redux",
-        "micro frontend",
-        "microfrontend",
-        "microfrontends",
-        "micro frontends",
-        "state",
-        "statemanagement"
-    ],
-    "bugs": {
-        "url": "https://github.com/microsoft/redux-micro-frontend/issues",
-        "email": "pratikb@microsoft.com"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/microsoft/redux-micro-frontend"
-    },
+    "name": "mf-shell-container",
     "scripts": {
         "build": "webpack",
         "start": "webpack serve"

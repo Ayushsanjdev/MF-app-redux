@@ -9,12 +9,12 @@ export class AppLogin extends React.Component {
     super(props);
     this.state = {
       globalUser: null,
-      localUser: null,
       userPass: null,
       isLogged: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateState = this.updateState.bind(this);
     this.userChange = this.userChange.bind(this);
     this.passChange = this.passChange.bind(this);
 
@@ -26,15 +26,14 @@ export class AppLogin extends React.Component {
 
   updateState(globalState) {
     this.setState({
-      localUser: globalState.LoginApp.localUser,
       globalUser: globalState.LoginApp.globalUser,
-      isLogged: globalState.LoginApp.isLogged
+      isLogged: globalState.LoginApp.isLogged,
     });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    if (this.state.globalUser !== null && this.state.userPass !== null)
+    if (this.state.globalUser !== null && this.state.userPass !== null) {
       this.globalStore.DispatchAction(
         "LoginApp",
         login({
@@ -42,18 +41,21 @@ export class AppLogin extends React.Component {
           isLogged: true,
         })
       );
+    } else {
+      window.alert("error");
+    }
   }
 
   userChange(e) {
     this.setState({
-      globalUser: e.target.value
-    })
+      globalUser: e.target.value,
+    });
   }
 
   passChange(e) {
     this.setState({
-      userPass: e.target.value
-    })
+      userPass: e.target.value,
+    });
   }
 
   render() {
@@ -62,6 +64,7 @@ export class AppLogin extends React.Component {
         <Login
           userChange={this.userChange}
           passChange={this.passChange}
+          submit={this.handleSubmit}
         />
       </div>
     );

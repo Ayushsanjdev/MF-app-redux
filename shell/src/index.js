@@ -1,7 +1,5 @@
-(function() {
-
-    window["micro-front-end-context"] = true;
-    window["mountCounter"]("counter");
-    window["mountTodo"]("todo");
-
+(function () {
+  window["micro-front-end-context"] = true;
+  window["mountLogin"]("login");
+  window["mountProfile"]("profile");
 })();

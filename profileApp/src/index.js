@@ -1,15 +1,14 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { TodoList } from './todoList';
+import React from "react";
+import { render } from "react-dom";
+import { AppProfile } from "./appProfile";
 
+const mountProfile = (elementId) => {
+  const renderElemement = document.getElementById(elementId);
+  render(<AppProfile />, renderElemement);
+};
 
-const mountTodo = (elementId) => {
-    const renderElemement = document.getElementById(elementId);
-    render(<TodoList />, renderElemement);
-}
+window["mountProfile"] = mountProfile;
 
-window["mountTodo"] = mountTodo;
-
-if (!(window["micro-front-end-context"])) {
-    mountTodo("app");
+if (!window["micro-front-end-context"]) {
+  mountProfile("app");
 }

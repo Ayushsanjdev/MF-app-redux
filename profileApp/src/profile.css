@@ -1,0 +1,29 @@
+.profile-div {
+  max-width: 350px;
+  margin: 0 auto;
+  border: 3px solid #f1f1f1;
+  text-align: center;
+  padding: 2.5rem 0;
+}
+
+.profile-img {
+  width: 86px;
+  height: 89px;
+  border-radius: 50%;
+  border: 2px groove grey;
+}
+
+.logout-btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: min-content;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}

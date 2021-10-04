@@ -1,31 +1,6 @@
 {
-    "name": "redux-micro-frontend-sample-todo",
+    "name": "profile-app",
     "version": "0.0.0",
-    "license": "MIT",
-    "description": "This is a sample app with counter",
-    "author": {
-        "name": "Pratik Bhattacharya",
-        "email": "pratikb@microsoft.com",
-        "url": "https://www.devcompost.com/"
-    },
-    "homepage": "https://github.com/microsoft/redux-micro-frontend",
-    "keywords": [
-        "redux",
-        "micro frontend",
-        "microfrontend",
-        "microfrontends",
-        "micro frontends",
-        "state",
-        "statemanagement"
-    ],
-    "bugs": {
-        "url": "https://github.com/microsoft/redux-micro-frontend/issues",
-        "email": "pratikb@microsoft.com"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/microsoft/redux-micro-frontend"
-    },
     "scripts": {
         "build": "webpack",
         "start": "webpack serve",

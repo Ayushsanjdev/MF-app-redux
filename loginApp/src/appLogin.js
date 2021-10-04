@@ -26,8 +26,8 @@ export class AppLogin extends React.Component {
 
   updateState(globalState) {
     this.setState({
-      globalUser: globalState.LoginApp.globalUser,
-      isLogged: globalState.LoginApp.isLogged,
+      globalUser: globalState.LoginApp.global,
+      isLogged: globalState.LoginApp.global,
     });
   }
 

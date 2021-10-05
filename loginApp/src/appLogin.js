@@ -1,8 +1,8 @@
 import React from "react";
 import Login from "./login";
 import { GlobalStore } from "redux-micro-frontend";
-import { userReducer } from "./userReducer";
-import { login, logout } from "./userReducer";
+import { UserReducer } from "./store/userReducer";
+import { LoginUser } from "./store/userActions";
 
 export class AppLogin extends React.Component {
   constructor(props) {
@@ -13,37 +13,15 @@ export class AppLogin extends React.Component {
       isLogged: false,
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.updateState = this.updateState.bind(this);
     this.userChange = this.userChange.bind(this);
     this.passChange = this.passChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateState = this.updateState.bind(this);
 
     this.globalStore = GlobalStore.Get(false);
-    this.store = this.globalStore.CreateStore("LoginApp", userReducer, []);
-    this.globalStore.RegisterGlobalActions("LoginApp", [login, logout]);
+    this.store = this.globalStore.CreateStore("LoginApp", UserReducer, []);
+    this.globalStore.RegisterGlobalActions("LoginApp", ["LOG_IN", "LOG_OUT"]);
     this.globalStore.SubscribeToGlobalState("LoginApp", this.updateState);
-  }
-
-  updateState(globalState) {
-    this.setState({
-      globalUser: globalState.LoginApp.global,
-      isLogged: globalState.LoginApp.global,
-    });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    if (this.state.globalUser !== null && this.state.userPass !== null) {
-      this.globalStore.DispatchAction(
-        "LoginApp",
-        login({
-          name: this.state.globalUser,
-          isLogged: true,
-        })
-      );
-    } else {
-      window.alert("error");
-    }
   }
 
   userChange(e) {
@@ -58,14 +36,37 @@ export class AppLogin extends React.Component {
     });
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.state.globalUser !== null && this.state.userPass !== null) {
+      this.globalStore.DispatchAction(
+        "LoginApp",
+        LoginUser(this.state.globalUser, this.state.isLogged)
+      );
+    } else {
+      window.alert("error");
+    }
+  }
+
+  updateState(globalState) {
+    this.setState({
+      globalUser: globalState.LoginApp.globalUser,
+      isLogged: globalState.LoginApp.isLogged,
+    });
+  }
+
   render() {
     return (
       <div>
-        <Login
-          userChange={this.userChange}
-          passChange={this.passChange}
-          submit={this.handleSubmit}
-        />
+        {this.state.isLogged ? (
+          ""
+        ) : (
+          <Login
+            userChange={this.userChange}
+            passChange={this.passChange}
+            submit={this.handleSubmit}
+          />
+        )}
       </div>
     );
   }

@@ -20,6 +20,8 @@
         "html-webpack-plugin": "^4.5.0",
         "react": "^16.14.0",
         "react-dom": "^16.14.0",
+        "react-redux": "^7.2.5",
+        "redux": "^4.1.1",
         "redux-micro-frontend": "^1.1.1",
         "style-loader": "^2.0.0",
         "webpack": "^5.1.3",

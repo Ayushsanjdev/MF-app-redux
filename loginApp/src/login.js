@@ -13,7 +13,6 @@ export class Login extends React.Component {
             </label>
             <input
               type="text"
-              placeholder="alexnaren0123"
               name="uname"
               required
               onChange={this.props.userChange}
@@ -24,7 +23,6 @@ export class Login extends React.Component {
             </label>
             <input
               type="password"
-              placeholder="***********"
               name="psw"
               required
               onChange={this.props.passChange}

@@ -11,9 +11,9 @@ export class Profile extends React.Component {
           className="profile-img"
         />
         <h5>{this.props.user}</h5>
-        <button className="logout-btn" type="button">
+        {/* <button className="logout-btn" type="button">
           Logout
-        </button>
+        </button> */}
       </div>
     );
   }

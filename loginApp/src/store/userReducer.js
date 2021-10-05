@@ -3,12 +3,12 @@ export const UserReducer = (state = initialState, action) => {
     return {
       ...state,
       globalUser: action.payload.user,
-      isLogged: action.payload.isLogged,
+      isLogged: action.payload.isLogged
     };
   return state;
 };
 
 var initialState = {
   globalUser: null,
-  isLogged: false,
+  isLogged: true,
 };

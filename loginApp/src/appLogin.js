@@ -11,6 +11,7 @@ export class AppLogin extends React.Component {
       globalUser: null,
       userPass: null,
       isLogged: false,
+      showProfile: false,
     };
 
     this.userChange = this.userChange.bind(this);
@@ -43,6 +44,9 @@ export class AppLogin extends React.Component {
         "LoginApp",
         LoginUser(this.state.globalUser, this.state.isLogged)
       );
+      this.setState({
+        showProfile: true,
+      });
     } else {
       window.alert("error");
     }
@@ -58,14 +62,14 @@ export class AppLogin extends React.Component {
   render() {
     return (
       <div>
-        {this.state.isLogged ? (
-          ""
-        ) : (
+        {!this.state.showProfile ? (
           <Login
             userChange={this.userChange}
             passChange={this.passChange}
             submit={this.handleSubmit}
           />
+        ) : (
+          ""
         )}
       </div>
     );

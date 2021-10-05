@@ -9,7 +9,8 @@ export class AppProfile extends React.Component {
     super(props);
 
     this.state = {
-      globalUser: null
+      globalUser: null,
+      isLogged: true,
     };
 
     this.userStateChange = this.userStateChange.bind(this);
@@ -34,14 +35,15 @@ export class AppProfile extends React.Component {
   userStateChange(user) {
     this.setState({
       globalUser: user.globalUser,
+      isLogged: user.isLogged,
     });
   }
 
   render() {
-    return (
-      <div>
-        <Profile user={this.state.globalUser}/>
-      </div>
-    );
+    return <div>{
+      !this.state.isLogged ?
+      <Profile user={this.state.globalUser} />
+      : ''
+      }</div>;
   }
 }

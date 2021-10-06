@@ -3,6 +3,8 @@ import { GlobalStore } from "redux-micro-frontend";
 import { createStore } from "redux";
 import { Profile } from "./Profile";
 import { profileReducer } from "./store/reducer";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
 
 export class AppProfile extends React.Component {
   constructor(props) {
@@ -40,10 +42,22 @@ export class AppProfile extends React.Component {
   }
 
   render() {
-    return <div>{
-      this.state.isLogged ?
-      <Profile user={this.state.globalUser} />
-      : ''
-      }</div>;
+    return (
+      <>
+        {!this.state.isLogged ? (
+          <div>
+            <Router>
+              <Switch>
+                <Route path="/">
+                  <Profile user={this.state.globalUser}/>
+                </Route>
+              </Switch>
+            </Router>
+          </div>
+        ) : (
+          ""
+        )}
+      </>
+    );
   }
 }

@@ -3,7 +3,8 @@ import Login from "./login";
 import { GlobalStore } from "redux-micro-frontend";
 import { UserReducer } from "./store/userReducer";
 import { LoginUser } from "./store/userActions";
-
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "./firebase/config";
 export class AppLogin extends React.Component {
   constructor(props) {
     super(props);
@@ -12,14 +13,14 @@ export class AppLogin extends React.Component {
       userPass: null,
       isLogged: false,
       showProfile: false,
+      isAuthenticated: null,
     };
 
     this.userChange = this.userChange.bind(this);
     this.passChange = this.passChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateState = this.updateState.bind(this);
-
-    this.globalStore = GlobalStore.Get(false);
+    this.auth = this.this.globalStore = GlobalStore.Get(false);
     this.store = this.globalStore.CreateStore("LoginApp", UserReducer, []);
     this.globalStore.RegisterGlobalActions("LoginApp", ["LOG_IN", "LOG_OUT"]);
     this.globalStore.SubscribeToGlobalState("LoginApp", this.updateState);
@@ -42,7 +43,7 @@ export class AppLogin extends React.Component {
     if (this.state.globalUser !== null && this.state.userPass !== null) {
       this.globalStore.DispatchAction(
         "LoginApp",
-        LoginUser(this.state.globalUser, this.state.isLogged)
+        LoginUser(this.state.globalUser)
       );
       this.setState({
         showProfile: true,
@@ -55,21 +56,38 @@ export class AppLogin extends React.Component {
   updateState(globalState) {
     this.setState({
       globalUser: globalState.LoginApp.globalUser,
-      isLogged: globalState.LoginApp.isLogged,
     });
+  }
+
+  componentDidMount() {
+    const unSubscribe = auth.onAuthStateChanged((userAuth) => {
+      const user = {
+        uid: userAuth?.uid,
+        email: userAuth?.email,
+      };
+      if (userAuth) {
+        console.log(userAuth);
+        this.setState({
+          isAuthenticated: user,
+        });
+      } else {
+        this.setState({
+          isAuthenticated: null,
+        });
+      }
+    });
+    return unSubscribe;
   }
 
   render() {
     return (
       <div>
-        {!this.state.showProfile ? (
+        {!this.state.isAuthenticated && (
           <Login
             userChange={this.userChange}
             passChange={this.passChange}
             submit={this.handleSubmit}
           />
-        ) : (
-          ""
         )}
       </div>
     );

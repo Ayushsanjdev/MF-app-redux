@@ -7,10 +7,6 @@
         "start-component": "webpack serve --config ./webpack.config.mf.js"
     },
     "private": false,
-    "dependencies": {
-        "react-router": "^5.2.1",
-        "react-router-dom": "^5.3.0"
-    },
     "devDependencies": {
         "@babel/cli": "^7.12.1",
         "@babel/core": "^7.12.3",
@@ -24,6 +20,8 @@
         "react": "^16.14.0",
         "react-dom": "^16.14.0",
         "react-redux": "^7.2.5",
+        "react-router": "^5.2.1",
+        "react-router-dom": "^5.3.0",
         "redux": "^4.1.1",
         "redux-micro-frontend": "^1.1.1",
         "style-loader": "^2.0.0",

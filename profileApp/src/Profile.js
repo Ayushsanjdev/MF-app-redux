@@ -13,15 +13,9 @@ export class Profile extends React.Component {
         <h5>
           User Name: <span className="username">{this.props.user}</span>
         </h5>
-        <h5>
-          Email: N/A 
-        </h5>
-        <h5>
-          Age: N/A
-        </h5>
-        <h5>
-          Company: N/A
-        </h5>
+        <h5>Email: N/A</h5>
+        <h5>Age: N/A</h5>
+        <h5>Company: N/A</h5>
       </div>
     );
   }

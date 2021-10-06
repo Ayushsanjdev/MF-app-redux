@@ -7,7 +7,10 @@
         "start-component": "webpack serve --config ./webpack.config.mf.js"
     },
     "private": false,
-    "dependencies": {},
+    "dependencies": {
+        "react-router": "^5.2.1",
+        "react-router-dom": "^5.3.0"
+    },
     "devDependencies": {
         "@babel/cli": "^7.12.1",
         "@babel/core": "^7.12.3",

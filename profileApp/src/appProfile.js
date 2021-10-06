@@ -41,7 +41,7 @@ export class AppProfile extends React.Component {
 
   render() {
     return <div>{
-      !this.state.isLogged ?
+      this.state.isLogged ?
       <Profile user={this.state.globalUser} />
       : ''
       }</div>;

@@ -4,6 +4,8 @@
   border: 3px solid #f1f1f1;
   text-align: center;
   padding: 2.5rem 0;
+  -webkit-box-shadow: -19px 17px 19px -3px rgba(66, 255, 144, 0.49);
+  box-shadow: -19px 17px 19px -3px rgba(162, 255, 201, 0.49);
 }
 
 .profile-img {
@@ -13,8 +15,15 @@
   border: 2px groove grey;
 }
 
+.userName {
+  font-size: larger;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+  color: cornflowerblue;
+}
+
 .logout-btn {
-  background-color: #04AA6D;
+  background-color: #04aa6d;
   color: white;
   padding: 12px 20px;
   margin: 8px 0;

@@ -14,10 +14,13 @@ h2 {
 /* Bordered form */
 form {
   border: 3px solid #f1f1f1;
+  -webkit-box-shadow: -19px 17px 19px -3px rgba(66, 255, 144, 0.49);
+  box-shadow: -19px 17px 19px -3px rgba(66, 255, 144, 0.49);
 }
 
 /* Full-width inputs */
-input[type=text], input[type=password] {
+input[type="text"],
+input[type="password"] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -28,14 +31,13 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-  background-color: #04AA6D;
+  background-color: #04aa6d;
   color: white;
   padding: 10px 20px;
   margin: 3px 0;
   border: none;
   cursor: pointer;
   width: min-content;
-  
 }
 
 /* Add a hover effect for buttons */

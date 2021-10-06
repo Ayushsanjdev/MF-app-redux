@@ -1,5 +1,5 @@
 import React from "react";
-import './profile.css';
+import "./profile.css";
 
 export class Profile extends React.Component {
   render() {
@@ -10,10 +10,18 @@ export class Profile extends React.Component {
           alt="profile"
           className="profile-img"
         />
-        <h5>{this.props.user}</h5>
-        {/* <button className="logout-btn" type="button">
-          Logout
-        </button> */}
+        <h5>
+          User Name: <span className="username">{this.props.user}</span>
+        </h5>
+        <h5>
+          Email: N/A 
+        </h5>
+        <h5>
+          Age: N/A
+        </h5>
+        <h5>
+          Company: N/A
+        </h5>
       </div>
     );
   }

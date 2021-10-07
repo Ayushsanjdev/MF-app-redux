@@ -1,11 +1,8 @@
 import React from "react";
 import { GlobalStore } from "redux-micro-frontend";
 import { createStore } from "redux";
-import { Profile } from "./Profile";
 import { profileReducer } from "./store/reducer";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
-
+import Navbar from "../components/navbar";
 export class AppProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +10,7 @@ export class AppProfile extends React.Component {
     this.state = {
       globalUser: null,
       globalEmail: null,
-      auth: null,
+      isAuthenticated: null,
     };
 
     this.userStateChange = this.userStateChange.bind(this);
@@ -39,27 +36,20 @@ export class AppProfile extends React.Component {
     this.setState({
       globalUser: global.globalUser,
       globalEmail: global.globalEmail,
-      auth: global.auth
+      isAuthenticated: global.isAuthenticated,
     });
   }
 
   render() {
     return (
-      <>
-        {this.state.auth !== null ? (
-          <div>
-            <Router>
-              <Switch>
-                <Route path="/">
-                  <Profile user={this.state.globalUser} email={this.state.globalEmail}/>
-                </Route>
-              </Switch>
-            </Router>
-          </div>
-        ) : (
-          ""
+      <div>
+        {!this.state.isAuthenticated && (
+          <Navbar
+            globalUser={this.state.globalUser}
+            globalEmail={this.state.globalEmail}
+          />
         )}
-      </>
+      </div>
     );
   }
 }

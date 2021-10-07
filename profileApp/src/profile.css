@@ -19,9 +19,10 @@ body {
   border: 2px groove grey;
 }
 
-.userName {
+.profile-details {
   font-size: larger;
-  font-family: "Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS", sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS",
+    sans-serif;
   font-weight: bolder;
   color: cornflowerblue;
 }
@@ -43,11 +44,17 @@ body {
 .logout-btn {
   background-color: #04aa6d;
   color: white;
-  padding: 12px 20px;
+  padding: 0.7rem 1.2rem;
   margin: 8px 0;
   border: none;
   cursor: pointer;
   width: min-content;
+}
+
+.navbar {
+  display: flex;
+  list-style-type: none;
+  gap: 1rem;
 }
 
 /* Add a hover effect for buttons */

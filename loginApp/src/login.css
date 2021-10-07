@@ -31,8 +31,9 @@ input[type="email"] {
 }
 
 .loader {
-  text-align: center;
-  margin-top: 3rem;
+  position: absolute;
+  top: 20%;
+  left: 40%;
 }
 
 /* Set a style for all buttons */

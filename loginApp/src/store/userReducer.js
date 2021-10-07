@@ -4,7 +4,7 @@ export const UserReducer = (state = initialState, action) => {
       ...state,
       globalUser: action.payload.user,
       globalEmail: action.payload.email,
-      auth: action.payload.auth,
+      isAuthenticated: action.payload.auth,
     };
   return state;
 };
@@ -12,5 +12,5 @@ export const UserReducer = (state = initialState, action) => {
 var initialState = {
   globalUser: null,
   globalEmail: null,
-  auth: null,
+  isAuthenticated: null,
 };

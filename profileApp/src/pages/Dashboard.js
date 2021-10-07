@@ -1,24 +1,13 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Route, Router, Switch } from "react-router";
-import { Profile } from "../Profile";
 
 const Dashboard = ({ user }) => {
   return (
     <>
-      <div>
-        Welcome <span className="welcome-user">{user}</span> !!
-      </div>
-      <Router>
-        <Route path="/" component={Profile}/>
-      </Router>
+      <h1>
+        Welcome <span className="welcome-user">{user ? user : "N/A"}</span> !!
+      </h1>
     </>
   );
 };
 
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = {};
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
 export default Dashboard;

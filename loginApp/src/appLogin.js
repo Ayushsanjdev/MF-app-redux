@@ -9,14 +9,13 @@ import {
 } from "./firebase/firebase_config";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+
 export class AppLogin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       globalUser: null,
       userPass: null,
-      isLogged: false,
-      showProfile: false,
       isAuthenticated: null,
       globalEmail: null,
     };
@@ -50,9 +49,23 @@ export class AppLogin extends React.Component {
     });
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
     if (this.state.globalUser !== null && this.state.userPass !== null) {
+      const loggedIn = await signInWithEmailAndPassword(
+        getAuth(),
+        this.state.globalEmail,
+        this.state.userPass
+      )
+        .then((userCredential) => {
+          this.setState({
+            isAuthenticated: userCredential.user.uid,
+          });
+        })
+        .catch((error) => {
+          window.alert(`${error.code}  ${error.message}`);
+        });
+
       this.globalStore.DispatchAction(
         "LoginApp",
         LoginUser(
@@ -61,26 +74,7 @@ export class AppLogin extends React.Component {
           this.state.isAuthenticated
         )
       );
-      this.setState({
-        showProfile: true,
-      });
-      signInWithEmailAndPassword(
-        getAuth(),
-        this.state.globalEmail,
-        this.state.userPass
-      )
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          this.setState({
-            isAuthenticated: user,
-          });
-          console.log(user);
-        })
-        .catch((error) => {
-          window.alert(error.code);
-          console.log(error.message);
-        });
+      return loggedIn;
     }
   }
 
@@ -105,11 +99,11 @@ export class AppLogin extends React.Component {
         ) : (
           <div className="loader">
             <Loader
-              type="Puff"
+              type="ThreeDots"
               color="#00BFFF"
-              height={200}
-              width={200}
-              timeout={2000} //2 secs
+              height={300}
+              width={300}
+              timeout={800}
             />
           </div>
         )}

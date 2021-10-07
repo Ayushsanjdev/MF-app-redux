@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "./login.css";
 
 export class Login extends React.Component {
   render() {
@@ -47,9 +47,10 @@ export class Login extends React.Component {
           </form>
         </div>
         <div style={{ textAlign: "center" }}>
-          <h4>User Credential</h4>
-          <b>Email: test123@test.com</b> <br />
-          <b>Password: test123</b>
+          <h3>User Credential</h3>
+          <i>User Name: any</i><br />
+          <i>Email: test123@test.com</i> <br />
+          <i>Password: test123</i>
         </div>
       </>
     );

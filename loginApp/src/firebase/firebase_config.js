@@ -1,6 +1,7 @@
-import firebase from "firebase";
+import firebase from "firebase/compat/app";
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyBOHb8HL3xDGyq6C93187JbfJgEzI8sbGs",
   authDomain: "mfe-auth.firebaseapp.com",
   projectId: "mfe-auth",
@@ -9,8 +10,6 @@ var firebaseConfig = {
   appId: "1:658164976595:web:cf8f2583b09ea759ccbd26",
 };
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const auth = firebase.auth();
-export { auth };
-export default db;
+const app = firebase.initializeApp(firebaseConfig);
+
+export { getAuth, signInWithEmailAndPassword };

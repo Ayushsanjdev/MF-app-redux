@@ -12,7 +12,8 @@ export class AppProfile extends React.Component {
 
     this.state = {
       globalUser: null,
-      isLogged: true,
+      globalEmail: null,
+      auth: null,
     };
 
     this.userStateChange = this.userStateChange.bind(this);
@@ -34,22 +35,23 @@ export class AppProfile extends React.Component {
     }
   }
 
-  userStateChange(user) {
+  userStateChange(global) {
     this.setState({
-      globalUser: user.globalUser,
-      isLogged: user.isLogged,
+      globalUser: global.globalUser,
+      globalEmail: global.globalEmail,
+      auth: global.auth
     });
   }
 
   render() {
     return (
       <>
-        {!this.state.isLogged ? (
+        {this.state.auth !== null ? (
           <div>
             <Router>
               <Switch>
                 <Route path="/">
-                  <Profile user={this.state.globalUser}/>
+                  <Profile user={this.state.globalUser} email={this.state.globalEmail}/>
                 </Route>
               </Switch>
             </Router>

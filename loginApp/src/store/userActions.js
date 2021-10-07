@@ -1,7 +1,7 @@
-export const LoginUser = (user, isLogged) => {
+export const LoginUser = (user, email, auth) => {
   return {
     type: "LOG_IN",
-    payload: { user, isLogged },
+    payload: { user, email, auth },
   };
 };
 

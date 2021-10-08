@@ -23,11 +23,11 @@ export class AppLogin extends React.Component {
     this.userChange = this.userChange.bind(this);
     this.passChange = this.passChange.bind(this);
     this.emailChange = this.emailChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
     this.updateState = this.updateState.bind(this);
     this.globalStore = GlobalStore.Get(false);
     this.store = this.globalStore.CreateStore("LoginApp", UserReducer, []);
-    this.globalStore.RegisterGlobalActions("LoginApp", ["LOG_IN", "LOG_OUT"]);
+    this.globalStore.RegisterGlobalActions("LoginApp", ["LOG_IN"]);
     this.globalStore.SubscribeToGlobalState("LoginApp", this.updateState);
   }
 
@@ -49,7 +49,7 @@ export class AppLogin extends React.Component {
     });
   }
 
-  async handleSubmit(e) {
+  async handleLogin(e) {
     e.preventDefault();
     if (this.state.globalUser !== null && this.state.userPass !== null) {
       const loggedIn = await signInWithEmailAndPassword(
@@ -59,7 +59,7 @@ export class AppLogin extends React.Component {
       )
         .then((userCredential) => {
           this.setState({
-            isAuthenticated: userCredential.user.uid,
+            isAuthenticated: userCredential.user,
           });
         })
         .catch((error) => {
@@ -78,6 +78,17 @@ export class AppLogin extends React.Component {
     }
   }
 
+  handleLogout() {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        window.alert("Signed out successfully!");
+      })
+      .catch((error) => {
+        window.alert(`${error.code}  ${error.message}`);
+      });
+  }
+
   updateState(globalState) {
     this.setState({
       globalUser: globalState.LoginApp.globalUser,
@@ -94,16 +105,16 @@ export class AppLogin extends React.Component {
             userChange={this.userChange}
             passChange={this.passChange}
             emailChange={this.emailChange}
-            submit={this.handleSubmit}
+            submit={this.handleLogin}
           />
         ) : (
           <div className="loader">
             <Loader
               type="ThreeDots"
               color="#00BFFF"
-              height={300}
-              width={300}
-              timeout={800}
+              height={100}
+              width={100}
+              timeout={500}
             />
           </div>
         )}

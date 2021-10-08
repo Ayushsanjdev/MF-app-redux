@@ -10,7 +10,7 @@ module.exports = {
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             title: "React",
-            template: 'index.html'
+            template: 'index.html',
         })
     ],
     module: {
@@ -27,6 +27,7 @@ module.exports = {
         // contentBase: './dist',
         port: 5001,
         historyApiFallback: true,
+        hot: true,
     },
     output: {
         filename: '[name].bundle.js',

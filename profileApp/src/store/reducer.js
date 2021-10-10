@@ -1,8 +1,12 @@
-export const profileReducer = (state = [], action) => {
+export const profileReducer = (state = initialState, action) => {
   if (action.type === "LOG_OUT")
     return {
       ...state,
-      action: null,
+      isAuthenticated: null,
     };
   return state;
 };
+
+var initialState = {
+  isAuthenticated: null,
+}

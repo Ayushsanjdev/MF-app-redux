@@ -1,9 +1,6 @@
 import React from "react";
 import "../profile.css";
 export class Profile extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (

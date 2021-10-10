@@ -25,9 +25,10 @@ export class AppLogin extends React.Component {
     this.emailChange = this.emailChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.updateState = this.updateState.bind(this);
+
     this.globalStore = GlobalStore.Get(false);
     this.store = this.globalStore.CreateStore("LoginApp", UserReducer, []);
-    this.globalStore.RegisterGlobalActions("LoginApp", ["LOG_IN"]);
+    this.globalStore.RegisterGlobalActions("LoginApp", ["LOG_IN", "LOG_OUT"]);
     this.globalStore.SubscribeToGlobalState("LoginApp", this.updateState);
   }
 
@@ -58,35 +59,20 @@ export class AppLogin extends React.Component {
         this.state.userPass
       )
         .then((userCredential) => {
-          this.setState({
-            isAuthenticated: userCredential.user,
-          });
+          this.globalStore.DispatchAction(
+            "LoginApp",
+            LoginUser(
+              this.state.globalUser,
+              this.state.globalEmail,
+              userCredential
+            )
+          );
         })
         .catch((error) => {
           window.alert(`${error.code}  ${error.message}`);
         });
-
-      this.globalStore.DispatchAction(
-        "LoginApp",
-        LoginUser(
-          this.state.globalUser,
-          this.state.globalEmail,
-          this.state.isAuthenticated
-        )
-      );
       return loggedIn;
     }
-  }
-
-  handleLogout() {
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        window.alert("Signed out successfully!");
-      })
-      .catch((error) => {
-        window.alert(`${error.code}  ${error.message}`);
-      });
   }
 
   updateState(globalState) {
@@ -100,7 +86,7 @@ export class AppLogin extends React.Component {
   render() {
     return (
       <div>
-        {!this.state.isAuthenticated ? (
+        {this.state.isAuthenticated === null ? (
           <Login
             userChange={this.userChange}
             passChange={this.passChange}

@@ -4,6 +4,7 @@ import { createStore } from "redux";
 import { profileReducer } from "./store/reducer";
 import Navbar from "../components/navbar";
 import { LogoutUser } from "./store/actions";
+
 export class AppProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -15,6 +16,7 @@ export class AppProfile extends React.Component {
     };
 
     this.userStateChange = this.userStateChange.bind(this);
+    this.stateChange = this.stateChange.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
 
     this.globalStore = GlobalStore.Get();
@@ -32,13 +34,14 @@ export class AppProfile extends React.Component {
     } catch (error) {
       console.log(error);
     }
+    this.globalStore.Subscribe("ProfileApp", this.stateChange);
   }
 
   handleLogout() {
-    this.globalStore.DispatchAction(
-      "ProfileApp",
-      LogoutUser(this.props.isAuthenticated)
-    );
+    this.globalStore.DispatchAction("ProfileApp", LogoutUser(this.state.isAuthenticated))
+    this.setState({
+      isAuthenticated: null,
+    })
   }
 
   userStateChange(global) {
@@ -46,6 +49,12 @@ export class AppProfile extends React.Component {
       globalUser: global.globalUser,
       globalEmail: global.globalEmail,
       isAuthenticated: global.isAuthenticated,
+    });
+  }
+
+  stateChange(globalState) {
+    this.setState({
+      isAuthenticated: globalState,
     });
   }
 

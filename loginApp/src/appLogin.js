@@ -23,8 +23,9 @@ export class AppLogin extends React.Component {
     this.userChange = this.userChange.bind(this);
     this.passChange = this.passChange.bind(this);
     this.emailChange = this.emailChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
     this.updateState = this.updateState.bind(this);
+
     this.globalStore = GlobalStore.Get(false);
     this.store = this.globalStore.CreateStore("LoginApp", UserReducer, []);
     this.globalStore.RegisterGlobalActions("LoginApp", ["LOG_IN", "LOG_OUT"]);
@@ -49,7 +50,7 @@ export class AppLogin extends React.Component {
     });
   }
 
-  async handleSubmit(e) {
+  async handleLogin(e) {
     e.preventDefault();
     if (this.state.globalUser !== null && this.state.userPass !== null) {
       const loggedIn = await signInWithEmailAndPassword(
@@ -58,22 +59,18 @@ export class AppLogin extends React.Component {
         this.state.userPass
       )
         .then((userCredential) => {
-          this.setState({
-            isAuthenticated: userCredential.user.uid,
-          });
+          this.globalStore.DispatchAction(
+            "LoginApp",
+            LoginUser(
+              this.state.globalUser,
+              this.state.globalEmail,
+              userCredential
+            )
+          );
         })
         .catch((error) => {
           window.alert(`${error.code}  ${error.message}`);
         });
-
-      this.globalStore.DispatchAction(
-        "LoginApp",
-        LoginUser(
-          this.state.globalUser,
-          this.state.globalEmail,
-          this.state.isAuthenticated
-        )
-      );
       return loggedIn;
     }
   }
@@ -89,21 +86,21 @@ export class AppLogin extends React.Component {
   render() {
     return (
       <div>
-        {!this.state.isAuthenticated ? (
+        {this.state.isAuthenticated === null ? (
           <Login
             userChange={this.userChange}
             passChange={this.passChange}
             emailChange={this.emailChange}
-            submit={this.handleSubmit}
+            submit={this.handleLogin}
           />
         ) : (
           <div className="loader">
             <Loader
               type="ThreeDots"
               color="#00BFFF"
-              height={300}
-              width={300}
-              timeout={800}
+              height={100}
+              width={100}
+              timeout={500}
             />
           </div>
         )}

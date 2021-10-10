@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 import Dashboard from "../src/pages/Dashboard";
 import { Profile } from "../src/pages/Profile";
 
-function Navbar({ globalEmail, globalUser }) {
+function Navbar({ globalEmail, globalUser, logout }) {
   return (
     <div>
       <header>
@@ -21,7 +21,7 @@ function Navbar({ globalEmail, globalUser }) {
               <Dashboard user={globalUser} />
             </Route>
             <Route exact path="/">
-              <Profile email={globalEmail} user={globalUser} />
+              <Profile email={globalEmail} user={globalUser} logout={logout} />
             </Route>
           </Switch>
         </Router>

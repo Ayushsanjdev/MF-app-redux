@@ -6,6 +6,10 @@ export const UserReducer = (state = initialState, action) => {
       globalEmail: action.payload.email,
       isAuthenticated: action.payload.auth,
     };
+  if (action.type === "LOG_OUT") return {
+    ...state,
+    isAuthenticated: null,
+  };
   return state;
 };
 

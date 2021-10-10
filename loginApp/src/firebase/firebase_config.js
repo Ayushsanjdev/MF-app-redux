@@ -1,5 +1,5 @@
 import firebase from "firebase/compat/app";
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBOHb8HL3xDGyq6C93187JbfJgEzI8sbGs",
@@ -10,6 +10,6 @@ const firebaseConfig = {
   appId: "1:658164976595:web:cf8f2583b09ea759ccbd26",
 };
 
-const app = firebase.initializeApp(firebaseConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-export { getAuth, signInWithEmailAndPassword };
+export { getAuth, signInWithEmailAndPassword, firebaseApp };

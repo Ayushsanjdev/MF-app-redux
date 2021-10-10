@@ -1,7 +1,7 @@
 import React from "react";
 import "../profile.css";
-
 export class Profile extends React.Component {
+
   render() {
     return (
       <>
@@ -29,7 +29,13 @@ export class Profile extends React.Component {
           <h5>
             Company: <span className="profile-details">N/A</span>
           </h5>
-          <button className="logout-btn">Logout</button>
+          <button
+            className="logout-btn"
+            type="button"
+            onClick={this.props.logout}
+          >
+            Logout
+          </button>
         </div>
       </>
     );

@@ -61,7 +61,7 @@ export class AppProfile extends React.Component {
   render() {
     return (
       <div>
-        {this.state.isAuthenticated && (
+        {!this.state.isAuthenticated && (
           <Navbar
             globalUser={this.state.globalUser}
             globalEmail={this.state.globalEmail}
